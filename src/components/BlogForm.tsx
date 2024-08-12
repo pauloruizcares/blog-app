@@ -1,6 +1,7 @@
-import React from 'react';
-import { Form, Input, Button, DatePicker, Col, Row, Modal } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Input, Button, Col, Row, Modal } from 'antd';
 import { BlogPost } from "../models/BlogPost";
+import { create } from "domain";
 import moment from "moment";
 
 const { confirm } = Modal;
@@ -9,13 +10,12 @@ interface BlogFormProps {
     initialValues?: BlogPost;
     action: 'add' | 'update';
     onSubmit: (values: BlogPost) => void;
+    onCancel: () => void;
 }
 
 const BlogForm: React.FC<BlogFormProps> = (props: BlogFormProps) => {
-    const { initialValues, onSubmit, action } = props;
+    const { initialValues, onSubmit, action, onCancel } = props;
     const [form] = Form.useForm();
-
-    console.log('initialValues', initialValues);
 
     const handleFinish = (values: any) => {
         onSubmit({
@@ -38,17 +38,22 @@ const BlogForm: React.FC<BlogFormProps> = (props: BlogFormProps) => {
         });
     };
 
-    const formattedInitialValues = {
-        ...initialValues,
-        createdAt: initialValues?.createdAt ? moment(initialValues.createdAt).format('DD/MM/YYYY hh:mm') : '',
-        updatedAt: initialValues?.updatedAt ? moment(initialValues.updatedAt).format('DD/MM/YYYY hh:mm') : '',
-    };
+    useEffect(() => {
+        if (initialValues) {
+            form.setFieldsValue({
+                ...initialValues,
+                createdAt: initialValues.createdAt ? moment( initialValues.createdAt).format("DD/MM/YYYY hh:mm") : '',
+                updatedAt: initialValues.createdAt ? moment( initialValues.updatedAt).format("DD/MM/YYYY hh:mm") : '',
+
+            });
+        }
+    }, [initialValues, form]);
+
 
     return (
         <Form
             form={form}
             layout="vertical"
-            initialValues={formattedInitialValues}
             onFinish={showCreateOrUpdateConfirm}
         >
             <Row gutter={16}>
@@ -103,9 +108,19 @@ const BlogForm: React.FC<BlogFormProps> = (props: BlogFormProps) => {
                 </Col>
             </Row>}
             <Form.Item>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
+                <Row justify="end" gutter={10}>
+                    <Col>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button type="link" htmlType="reset" onClick={onCancel}>
+                            Cancel
+                        </Button>
+                    </Col>
+                </Row>
+
             </Form.Item>
         </Form>
     );

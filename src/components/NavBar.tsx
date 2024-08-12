@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu } from 'antd';
 import { HomeOutlined, ReadOutlined } from '@ant-design/icons';
 import './NavBar.scss';
-import SignIn from "../SignIn";
+import SignIn from "./SignIn";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
 import { useNavigate } from "react-router-dom";
 

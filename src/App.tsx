@@ -1,6 +1,6 @@
 import './App.scss';
 import { Layout } from 'antd';
-import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/NavBar";
 import { BrowserRouter } from 'react-router-dom'
 import { RouterContainer } from "./routes/Route";
 

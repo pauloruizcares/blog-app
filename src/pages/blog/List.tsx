@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useBlogPosts } from "../../hooks/useBlogPosts";
 import { useDeleteBlogPost } from "../../hooks/useDeleteBlogPost";
+import './List.scss';
 
 
 export const ListBlog = () => {
@@ -21,6 +22,8 @@ export const ListBlog = () => {
         refetch()
     };
 
+    console.log('data', data);
+
     if (isLoading) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -30,9 +33,11 @@ export const ListBlog = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <div>
                 <h1>List Blog</h1>
+            </div>
+            <div className="section-actions">
                 <Link to="/blog/add">
                     <Button type="primary" icon={<PlusOutlined />} />
                 </Link>

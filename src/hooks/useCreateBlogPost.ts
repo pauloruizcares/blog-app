@@ -8,5 +8,5 @@ export const useCreateBlogPost = () => {
     onSuccess: () => {
       queryClient.invalidateQueries("blogPosts");
     },
-  });
+  }, );
 };

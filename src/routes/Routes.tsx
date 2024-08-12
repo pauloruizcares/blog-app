@@ -1,7 +1,7 @@
 import { AddBlog } from "../pages/blog/Add";
 import { ListBlog } from "../pages/blog/List";
 import { Home } from "../pages/Home";
-import { UpdateBlog } from "../pages/blog/Update";
+import  UpdateBlog from "../pages/blog/Update";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 
