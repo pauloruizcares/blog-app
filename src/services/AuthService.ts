@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { SessionUserResponse } from '../models/responses/SessionUser';
 
-const BASE_URL = 'http://localhost:4000';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const axiosInstance = axios.create({
+export const api = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
 });
 
 const checkSession = async () => {
   try {
-    const { data } = await axiosInstance.get('/api/auth/check-session');
+    const { data } = await api.get('/api/auth/check-session');
     return data;
   } catch (error) {
     throw new Error('Error checking session');
@@ -19,7 +19,7 @@ const checkSession = async () => {
 
 const fetchUserData = async () => {
   try {
-    const { data } = await axiosInstance.get('/api/auth/user');
+    const { data } = await api.get('/api/auth/user');
     return data;
   } catch (error) {
     throw new Error('Error fetching user data');
@@ -56,7 +56,7 @@ export const getUserSession = async (): Promise<SessionUserResponse> => {
 
 export const logout = async () => {
   try {
-    await axiosInstance.post('/api/auth/logout');
+    await api.post('/api/auth/logout');
   } catch (error) {
     throw new Error('Error logging out');
   }
