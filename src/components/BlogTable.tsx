@@ -1,4 +1,4 @@
-import React from 'react';
+import { Component } from 'react';
 import { Button, Space, Table, Modal } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -13,71 +13,76 @@ interface BlogTableProps {
     onDelete: (id: string) => void;
 }
 
-const BlogTable: React.FC<BlogTableProps> = ({ data, onEdit, onDelete }) => {
-    const showDeleteConfirm = (id: string) => {
+class BlogTable extends Component<BlogTableProps> {
+    showDeleteConfirm = (id: string) => {
         confirm({
             title: 'Are you sure delete this blog post?',
             content: 'This action cannot be undone.',
             okText: 'Yes',
             okType: 'danger',
             cancelText: 'No',
-            onOk() {
-                onDelete(id);
+            onOk: () => {
+                this.props.onDelete(id);
             },
             onCancel() {
+                // Handle cancel if needed
             },
         });
     };
 
-    const columns: ColumnsType<BlogPost> = [
-        {
-            title: 'ID',
-            dataIndex: 'id',
-            key: 'id',
-            hidden: true,
-        },
-        {
-            title: 'Title',
-            dataIndex: 'title',
-            key: 'title',
-        },
-        {
-            title: 'Author',
-            dataIndex: 'author',
-            key: 'author',
-        },
-        {
-            title: 'Created At',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
-            render: (date: Date) => moment(date).format('YYYY-MM-DD HH:mm:ss'),
-        },
-        {
-            title: 'Updated At',
-            dataIndex: 'updatedAt',
-            key: 'updatedAt',
-            render: (date: Date) => moment(date).format('YYYY-MM-DD HH:mm:ss'),
-        },
-        {
-            title: 'Actions',
-            key: 'actions',
-            render: (_, record) => (
-                <Space size="middle">
-                    <Button
-                        icon={<EditOutlined />}
-                        onClick={() => onEdit(record.id)}
-                    />
-                    <Button
-                        icon={<DeleteOutlined />}
-                        onClick={() => showDeleteConfirm(record.id)}
-                        danger
-                    />
-                </Space>
-            ),
-        },
-    ];
+    render() {
+        const { data, onEdit } = this.props;
 
-    return <Table columns={columns} dataSource={data} rowKey="id" />;
-};
+        const columns: ColumnsType<BlogPost> = [
+            {
+                title: 'ID',
+                dataIndex: 'id',
+                key: 'id',
+                hidden: true,
+            },
+            {
+                title: 'Title',
+                dataIndex: 'title',
+                key: 'title',
+            },
+            {
+                title: 'Author',
+                dataIndex: 'author',
+                key: 'author',
+            },
+            {
+                title: 'Created At',
+                dataIndex: 'createdAt',
+                key: 'createdAt',
+                render: (date: Date) => moment(date).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: 'Updated At',
+                dataIndex: 'updatedAt',
+                key: 'updatedAt',
+                render: (date: Date) => moment(date).format('YYYY-MM-DD HH:mm:ss'),
+            },
+            {
+                title: 'Actions',
+                key: 'actions',
+                render: (_, record) => (
+                    <Space size="middle">
+                        <Button
+                            icon={<EditOutlined />}
+                            onClick={() => onEdit(record.id)}
+                        />
+                        <Button
+                            icon={<DeleteOutlined />}
+                            onClick={() => this.showDeleteConfirm(record.id)}
+                            danger
+                        />
+                    </Space>
+                ),
+            },
+        ];
+
+        return <Table columns={columns} dataSource={data} rowKey="id" />;
+    }
+}
 
 export default BlogTable;
