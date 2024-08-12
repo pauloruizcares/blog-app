@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, DatePicker, Col, Row, Modal } from 'antd';
 import { BlogPost } from "../models/BlogPost";
+import moment from "moment";
 
 const { confirm } = Modal;
 
@@ -37,11 +38,17 @@ const BlogForm: React.FC<BlogFormProps> = (props: BlogFormProps) => {
         });
     };
 
+    const formattedInitialValues = {
+        ...initialValues,
+        createdAt: initialValues?.createdAt ? moment(initialValues.createdAt).format('DD/MM/YYYY hh:mm') : '',
+        updatedAt: initialValues?.updatedAt ? moment(initialValues.updatedAt).format('DD/MM/YYYY hh:mm') : '',
+    };
+
     return (
         <Form
             form={form}
             layout="vertical"
-            initialValues={initialValues}
+            initialValues={formattedInitialValues}
             onFinish={showCreateOrUpdateConfirm}
         >
             <Row gutter={16}>

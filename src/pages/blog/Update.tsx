@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BlogForm from "../../components/BlogForm";
 import { useBlogPost } from "../../hooks/useBlogPost";
 import { useUpdateBlogPost } from "../../hooks/useUpdateBlogPost";
@@ -6,12 +6,13 @@ import { BlogPost } from "../../models/BlogPost";
 
 
 export const UpdateBlog = () => {
-    const { data } = useBlogPost('66b8bcac45eecbb76ef1a475');
+    const params = useParams();
+    const { data } = useBlogPost(params.id || '');
     const { mutate }  = useUpdateBlogPost();
     const navigate = useNavigate();
 
     const handleFormSubmit = (values: BlogPost) => {
-        mutate({ id: '66b8bcac45eecbb76ef1a475', blogPost: values });
+        mutate({ id: params.id || '', blogPost: values });
         navigate('/blog');
     };
 
