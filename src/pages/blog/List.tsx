@@ -48,3 +48,5 @@ export const ListBlog = () => {
         </div>
     );
 };
+
+export default ListBlog;

@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from "./components/ProtectedRoute";
 import AddBlog from "./pages/blog/Add";
 import UpdateBlog from "./pages/blog/Update";
-import { ListBlog } from "./pages/blog/List";
+import ListBlog from "./pages/blog/List";
 import Home from "./pages/Home";
 
 const { Header, Content } = Layout;
@@ -27,7 +27,6 @@ const App = () => {
         </Content>
       </Layout>
     </BrowserRouter>
-
   </>
   );
 }
