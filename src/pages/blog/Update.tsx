@@ -42,6 +42,7 @@ class UpdateBlog extends Component<UpdateBlogProps, UpdateBlogState> {
             const { id } = this.props;
             await updateBlogPost(id, values);
             this.setState({ redirectTo: '/blog' });
+            console.log("values", values);
         } catch (error) {
             message.error("Failed to create blog post");
             console.error("Failed to update blog post:", error);

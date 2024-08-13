@@ -1,11 +1,9 @@
-// src/pages/blog/Add.test.tsx
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { message } from 'antd';
 import { createBlogPost } from '../../services/BlogService';
 import AddBlog from './Add';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-// Mock de servicios y componentes
 jest.mock('../../services/BlogService');
 jest.mock('../../components/BlogForm', () => ({
     __esModule: true,
@@ -49,7 +47,6 @@ describe('AddBlog Component', () => {
             expect(screen.queryByText('Add Blog Post')).not.toBeInTheDocument();
         });
 
-        // Verificar redirección
         expect(screen.queryByText('Add Blog Post')).not.toBeInTheDocument();
     });
 

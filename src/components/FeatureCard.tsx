@@ -1,4 +1,3 @@
-// src/components/FeatureCard.tsx
 import React from 'react';
 import { Card } from 'antd';
 import './FeatureCard.scss';

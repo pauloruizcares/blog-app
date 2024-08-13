@@ -1,4 +1,3 @@
-// src/hooks/useBlogPosts.ts
 import { useQuery } from "react-query";
 import { getBlogPosts } from "../services/BlogService";
 
