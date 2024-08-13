@@ -22,12 +22,10 @@ export const ListBlog = () => {
         refetch()
     };
 
-    console.log('data', data);
-
     if (isLoading) {
         return (
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <Spin size="large" />
+                <Spin data-testid="status" size="large" />
             </div>
         );
     }
